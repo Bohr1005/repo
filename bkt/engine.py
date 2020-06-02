@@ -172,6 +172,10 @@ class BacktestingEngine:
             self,
             setting)
 
+    def add_pair(self,leading_leg:str,hedging_leg:str):
+        self.strategy.leading_leg = leading_leg
+        self.strategy.hedging_leg = hedging_leg
+
     def load_data(self):
         """"""
         self.output("开始加载历史数据")

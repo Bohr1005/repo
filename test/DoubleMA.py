@@ -108,8 +108,8 @@ class DoubleMAStrategy(Template):
             self.short(self.bars['ic'].vt_symbol,self.bars['ic'].close,5,300)
 
         if cross_over and not self.open_allow:
-            self.close(self.bars['if'].vt_symbol, self.bars['if'].close, 5, 300)
-            self.cover(self.bars['ic'].vt_symbol, self.bars['ic'].close, 5, 300)
+            self.close(self.bars['if'].vt_symbol, self.bars['if'].close, 5)
+            self.cover(self.bars['ic'].vt_symbol, self.bars['ic'].close, 5)
 
     def on_pos(self,pos:Position):
         """

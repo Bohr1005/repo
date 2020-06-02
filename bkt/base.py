@@ -181,11 +181,13 @@ class Position:
     def __getitem__(self, vt_symbol: str):
         ticker = self.long_pos.get(vt_symbol,None)
         if ticker:
-            return ticker
+            return ticker.volume
         else:
-            ticker = self.short_pos.get(vt_symbol, None)
+            ticker = self.short_pos.get(vt_symbol,None)
         if ticker:
-            return ticker
+            return ticker.volume
+        else:
+            return 0
 
     def long(self,trade:TradeData):
         date = trade.datetime.date()
@@ -236,7 +238,9 @@ class Position:
         if not ticker:
             return False
         else:
-            if abs(volume) > ticker.tradable:
+            if ticker.tradable == 0:
+                return
+            elif abs(volume) > ticker.tradable:
                 volume = ticker.tradable
                 trade.volume = volume
             ticker.update(date=date,price=price, volume=-volume)
@@ -255,7 +259,9 @@ class Position:
         if not ticker:
             return False
         else:
-            if abs(volume) > ticker.tradable:
+            if ticker.tradable == 0:
+                return
+            elif abs(volume) > ticker.tradable:
                 volume = ticker.tradable
                 trade.volume = volume
             ticker.update(date=date,price=price, volume=-volume)

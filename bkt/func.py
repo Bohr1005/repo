@@ -455,7 +455,7 @@ class BarManager:
         up = mid + std * dev
         down = mid - std * dev
 
-        return up, down
+        return up,mid, down
 
     def keltner(
         self,

@@ -26,6 +26,9 @@ class Template:
         self.bars: Bar = None
         self.ticks: Tick = None
 
+        self.leading_leg = None
+        self.hedging_leg = None
+
         self.variables = copy(self.variables)
         self.variables.insert(0, "inited")
         self.variables.insert(1, "trading")
@@ -155,23 +158,21 @@ class Template:
                                offset=Offset.SHORT,
                                multiplier=multiplier)
 
-    def close(self,vt_symbol,price: float,volume: int,multiplier:int=1) -> str:
+    def close(self,vt_symbol,price: float,volume: int) -> str:
         """"""
         return self.send_order(vt_symbol=vt_symbol,
                                price=price,
                                volume=volume,
                                direction=Direction.LONG,
-                               offset=Offset.CLOSE,
-                               multiplier=multiplier)
+                               offset=Offset.CLOSE)
 
-    def cover(self, vt_symbol, price: float, volume: int,multiplier:int=1) -> str:
+    def cover(self, vt_symbol, price: float, volume: int) -> str:
         """"""
         return self.send_order(vt_symbol=vt_symbol,
                                price=price,
                                volume=volume,
                                direction=Direction.SHORT,
-                               offset=Offset.COVER,
-                               multiplier=multiplier)
+                               offset=Offset.COVER)
 
     def load_bar(
         self,
@@ -206,7 +207,7 @@ class Template:
         return self.engine.account.equity
 
     @property
-    def unrealized(self):
+    def unrealized_pnl(self):
         return self.engine.account.unrealized_pnl
 
     @property
