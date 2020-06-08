@@ -4,7 +4,7 @@ from peewee import *
 from bkt.base import Bar,Tick
 
 
-PATH = "C:/Users/dell/Desktop/database.db"
+PATH = "D:/database.db"
 
 
 class ModelBase(Model):

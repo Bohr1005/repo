@@ -505,7 +505,7 @@ class BacktestingEngine:
         ga_capital = self.capital
         ga_slippage = self.slippage
 
-        toolbox = base.Toolbox
+        toolbox = base.Toolbox()
         toolbox.register("individual",tools.initIterate,creator.Individual,generate_parameter)
         toolbox.register("population",tools.initRepeat,list,toolbox.individual)
         toolbox.register("mate",tools.cxTwoPoint)

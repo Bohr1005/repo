@@ -6,11 +6,13 @@ for file in os.listdir():
     with open(file) as f:
         save_to_db(f,
                    vt_symbol=file[:-4],
-                   datetime_header='Datetime',
-                   open_header='Open',
-                   high_header='High',
-                   low_header='Low',
-                   close_header='Close',
-                   volume_header='Volume',
-                   datetime_format='%Y/%m/%d %H:%M')
+                   datetime_header='datetime',
+                   open_header='open',
+                   high_header='high',
+                   low_header='low',
+                   close_header='close',
+                   volume_header='volume',
+                   datetime_format='%Y-%m-%d %H:%M:%S',
+                   multipiler=300)
+        print(f"finished:{file}")
 

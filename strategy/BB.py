@@ -71,13 +71,16 @@ class BBStrategy(Template):
         """
         self.leading_bar = self.bars['if']
         self.hedging_bar = self.bars['ic']
-        ratio = self.leading_bar.close / self.hedging_bar.close
+        ratio_open = self.leading_bar.open / self.hedging_bar.open
+        ratio_high = self.leading_bar.high / self.hedging_bar.low
+        ratio_low = self.leading_bar.low / self.hedging_bar.high
+        ratio_close = self.leading_bar.close / self.hedging_bar.close
         price_ratio = Bar(time=self.leading_bar.datetime,
                           vt_symbol='spread',
-                          open=ratio,
-                          high=ratio,
-                          low=ratio,
-                          close=ratio,
+                          open=ratio_open,
+                          high=ratio_high,
+                          low=ratio_low,
+                          close=ratio_close,
                           open_interest=0,
                           volume=0)
 

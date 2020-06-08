@@ -101,13 +101,14 @@ class DoubleMAStrategy(Template):
         self.slow_ma0 = slow_ma[-1]
         self.slow_ma1 = slow_ma[-2]
 
-        cross_over = self.fast_ma0 > self.slow_ma0 and self.fast_ma1 < self.slow_ma1
+        long_signal = self.fast_ma0 > self.slow_ma0 and self.fast_ma1 < self.slow_ma1
+        short_signal = self.fast_ma0 < self.slow_ma0 and self.fast_ma1 > self.slow_ma1
 
-        if cross_over and self.open_allow:
+        if long_signal and self.open_allow:
             self.long(self.bars['if'].vt_symbol,self.bars['if'].close,5,300)
             self.short(self.bars['ic'].vt_symbol,self.bars['ic'].close,5,300)
 
-        if cross_over and not self.open_allow:
+        if short_signal and not self.open_allow:
             self.close(self.bars['if'].vt_symbol, self.bars['if'].close, 5)
             self.cover(self.bars['ic'].vt_symbol, self.bars['ic'].close, 5)
 
